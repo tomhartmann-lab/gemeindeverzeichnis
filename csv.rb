@@ -6,11 +6,10 @@ require 'csv'
 
 i = 0
 
-CSV.open('/dev/stdout', "wb", :col_sep => ';') do |csv|
-  Dir.glob("data/*.yaml").each do |file|
-    yaml = YAML.load_file(file)
-    csv << yaml.keys if i+=1
-    csv << yaml.values
-  end
+csv = CSV.new($stdout, col_sep: ';')
+Dir.glob("data/*.yaml").each do |file|
+  yaml = YAML.load_file(file)
+  csv << yaml.keys if i += 1
+  csv << yaml.values
 end
 
